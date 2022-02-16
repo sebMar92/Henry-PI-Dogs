@@ -1,0 +1,34 @@
+.filterBar {
+    background-color: rgb(181, 194, 137);
+    display:flex;
+    justify-content: space-between;
+}
+.filterOptions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+.temperamentsOption {
+    position: relative;
+}
+.temperamentsOption:hover .dropdown {
+    display: block;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    margin-left: -400%;
+    width: 450%;
+    z-index: 2;
+}
+.buttons-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin: 15px 15px 15px 0px;
+}
+.filterButton {
+    margin-right: 15px;
+}
