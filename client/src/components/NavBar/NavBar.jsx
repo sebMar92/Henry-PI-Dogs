@@ -10,7 +10,7 @@ export default function NavBar(){
             </div>
             <div>
                 <Link className="link" to="/home">Home</Link>
-                <Link className="link" to="/create">Create Dog Breeds</Link>
+                <Link className="link" to="/home/create">Create Dog Breeds</Link>
             </div>
         </nav>
     )

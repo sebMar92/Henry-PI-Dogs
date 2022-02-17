@@ -19,7 +19,7 @@ export default function FilterTemperaments(props){
                     type="checkbox"  
                     id={temperament.id} 
                     onChange={(e)=>{
-                        props.stateChanger(e.target.checked,temperament.name)
+                        props.stateChanger(e.target.checked,temperament.name);
                     }}
                     /> {temperament.name}
                 </label>

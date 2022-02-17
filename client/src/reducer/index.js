@@ -38,7 +38,7 @@ function rootReducer(state = initialState, { type, payload }){
                 dogsForFilter = state.dogs;
             }
             if (original !== null) {
-                if (original){
+                if (original === "Created"){
                     dogsForFilter = dogsForFilter.filter(dog => dog.hasOwnProperty("fromDatabase"));
                 } else {
                     dogsForFilter = dogsForFilter.filter(dog => !dog.hasOwnProperty("fromDatabase"));

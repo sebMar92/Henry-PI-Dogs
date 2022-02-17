@@ -4,6 +4,7 @@ export const GET_ALL_DOGS = "GET_ALL_DOGS";
 export const GET_ALL_TEMPERAMENTS = "GET_ALL_TEMPERAMENTS";
 export const GET_SEARCH_DOGS = "GET_SEARCH_DOGS";
 export const FILTER_DOGS = "FILTER_DOGS";
+export const POST_DOG = "POST_DOG";
 
 export function getDogs(){
     return async function(dispatch){
@@ -53,6 +54,15 @@ export function getTemperaments(){
         return dispatch({
             type: GET_ALL_TEMPERAMENTS,
             payload: temperaments.data,
+        })
+    }
+};
+export function postDog(name, minH, maxH, minW, maxW, minL, maxL, image, temperaments){
+    return async function(dispatch){
+        var status = await axios.post("http://localhost:3001/dog")
+        return dispatch({
+            type: POST_DOG,
+            payload: status.data,
         })
     }
 };

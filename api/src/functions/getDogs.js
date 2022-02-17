@@ -24,7 +24,7 @@ const getApiDogs = async function(){
 const getDbDogs = async function(){
     const dbDogs = await Dog.findAll(
         {
-            attributes: ["name", "id", "height", "weight", "lifespan", "image"],
+            attributes: ["name", "id", "height", "weight", "lifespan", "image", "fromDatabase"],
             include: {
                 model: Temperament,
                 as: "temperament",
