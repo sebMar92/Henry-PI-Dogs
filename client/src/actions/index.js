@@ -4,6 +4,8 @@ export const GET_ALL_DOGS = "GET_ALL_DOGS";
 export const GET_ALL_TEMPERAMENTS = "GET_ALL_TEMPERAMENTS";
 export const FILTER_DOGS = "FILTER_DOGS";
 export const POST_DOG = "POST_DOG";
+export const CHANGE_ORDER = "CHANGE_ORDER";
+export const PAGINATE = "PAGINATE"
 
 export function getDogs() {
   return async function (dispatch) {
@@ -55,4 +57,15 @@ export function postDog(dog) {
       payload: status.data,
     });
   };
+}
+export function changeOrder(orderData) {
+  return {
+    type: CHANGE_ORDER,
+    payload: orderData,
+  }
+}
+export function paginate(){
+  return {
+    type: PAGINATE,
+  }
 }

@@ -12,7 +12,6 @@ export default function DogCard({
   image,
   temperaments,
 }) {
-  console.log(temperaments);
   return (
     <Link to={`/home/${id}`}>
       <div className="card">
@@ -24,7 +23,7 @@ export default function DogCard({
           <p>Height: {`${minHeight} - ${maxHeight}`}</p>
           <p>Weight: {`${minWeight} - ${maxWeight}`}</p>
           <p>Lifespan: {lifespan}</p>
-          <p>Temperaments: {temperaments.join(", ")}</p>
+          <p>Temperaments: {temperaments && temperaments.join(", ")}</p>
         </div>
       </div>
     </Link>

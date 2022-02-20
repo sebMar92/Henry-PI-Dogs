@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { filterDogs } from "../../actions/index.js";
 import FilterTemperaments from "./FilterTemperaments/FilterTemperaments.jsx";
 import "./Filter.css";
-import lavander1 from "./lavander1.png";
 
 export default function Filter() {
   const [temperamentCheck, setTemperamentCheck] = useState([]);

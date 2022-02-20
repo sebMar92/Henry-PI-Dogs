@@ -1,14 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDogs } from "../../actions/index.js";
+import { getDogs, changeOrder, paginate } from "../../actions/index.js";
 import DogCard from "../DogCard/DogCard.jsx";
 import "./CardDisplay.css";
 
 export default function CardDisplay() {
   const [page, setPage] = useState(0);
   const dispatch = useDispatch();
-  let dogs = useSelector((state) => state.displayDogs);
+  let dogs = useSelector((state) => state.dogs);
+  let filtered = useSelector((state) => state.filtered.dogs);
+  let ordered = useSelector((state) => state.order);
+  let display = useSelector((state) => state.display);
   useEffect(() => {
     dispatch(getDogs());
   }, []);
@@ -25,20 +28,26 @@ export default function CardDisplay() {
         : (next.disabled = false);
     }
   }, [page]);
+  useEffect(() => {
+    dispatch(changeOrder({ type: ordered.type, reverse: ordered.reverse }))
+  }, [filtered, dogs]);
+  useEffect(() => {
+    dispatch(paginate())
+  }, [ordered]);
 
-  if (!Array.isArray(dogs)) {
+  if (!Array.isArray(display)) {
     return (
       <div className="display">
-        <p>{dogs.error}</p>
+        <p>{display.error}</p>
       </div>
     );
   }
   return (
     <div>
       <div className="display">
-        {dogs.length &&
-          dogs[page] &&
-          dogs[page].map((dog) => (
+        {display.length &&
+          display[page] &&
+          display[page].map((dog) => (
             <DogCard
               key={dog.id}
               id={dog.id}

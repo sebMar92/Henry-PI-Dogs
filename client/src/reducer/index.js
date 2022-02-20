@@ -1,37 +1,48 @@
 import {
   GET_ALL_DOGS,
-  CLEAR_FILTER,
   FILTER_DOGS,
   GET_ALL_TEMPERAMENTS,
+  PAGINATE,
+  CHANGE_ORDER
 } from "../actions/index.js";
 
 const initialState = {
   dogs: [],
-  displayDogs: [],
-  showFilter: false,
+  filtered: {
+    dogs: [],
+    isOn: false,
+  },
+  order: {
+    dogs: [],
+    type: "weight",
+    reverse: false,
+  },
+  display: [],
   detailedDog: [],
   temperaments: [],
 };
 
+function sortOrder(array, valueToCompare, optionalValue) {
+  array.sort(function (a, b) {
+    var dogA = a[valueToCompare] + optionalValue ? a[optionalValue] : "";
+    var DogB = b[valueToCompare] + optionalValue ? b[optionalValue] : "";
+    if (dogA < DogB) {
+      return -1;
+    }
+    if (dogA > DogB) {
+      return 1;
+    }
+    return 0;
+    });
+}
+
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
     case GET_ALL_DOGS:
-      if (state.showFilter === true) {
         return {
           ...state,
           dogs: payload,
         };
-      } else {
-        let inChunks = [];
-        for (let i = 0; i <= payload.length; i += 8) {
-          inChunks.push(payload.slice(i, i + 8));
-        }
-        return {
-          ...state,
-          dogs: payload,
-          displayDogs: inChunks,
-        };
-      }
     case FILTER_DOGS:
       const { original, temperaments, dogsByName } = payload;
       let dogsForFilter = [];
@@ -42,8 +53,7 @@ function rootReducer(state = initialState, { type, payload }) {
         if (dogsForFilter.hasOwnProperty("error")) {
           return {
             ...state,
-            displayDogs: dogsForFilter,
-            showFilter: true,
+            display: dogsForFilter,
           };
         }
       } else {
@@ -65,10 +75,9 @@ function rootReducer(state = initialState, { type, payload }) {
         if (dogsForFilter.length < 1) {
           return {
             ...state,
-            displayDogs: {
+            display: {
               error: "No hay razas de perro que matcheen esos filtros",
             },
-            showFilter: true,
           };
         }
       }
@@ -86,21 +95,18 @@ function rootReducer(state = initialState, { type, payload }) {
         if (dogsForFilter.length < 1) {
           return {
             ...state,
-            displayDogs: {
+            display: {
               error: "No hay razas de perro que matcheen esos filtros",
             },
-            showFilter: true,
           };
         }
       }
-      let inChunks = [];
-      for (let i = 0; i <= dogsForFilter.length; i += 8) {
-        inChunks.push(dogsForFilter.slice(i, i + 8));
-      }
       return {
         ...state,
-        displayDogs: inChunks,
-        showFilter: true,
+        filtered: {
+          dogs: dogsForFilter,
+          isOn: true,
+        }
       };
     case GET_ALL_TEMPERAMENTS:
       payload.sort(function (a, b) {
@@ -117,6 +123,36 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         temperaments: payload,
+      };
+    case CHANGE_ORDER:
+      let dogsToOrder = state.filtered.isOn ? state.filtered.dogs : state.dogs
+      if (payload.type === "alphabet") {
+        sortOrder(dogsToOrder, "name");
+      } else if (payload.type === "weight") {
+        sortOrder(dogsToOrder, "minWeight", "maxWeight");
+      } else if (payload.type === "height") {
+        sortOrder(dogsToOrder, "minHeight", "maxHeight");
+      }
+      if (payload.reverse) {
+        dogsToOrder.reverse();
+      }
+      return {
+        ...state,
+        order: {
+          dogs: dogsToOrder,
+          type: payload.type,
+          reverse: payload.reverse,
+        }
+      };
+    case PAGINATE: 
+      let dogsToPaginate = state.order.dogs;
+      let inChunks = [];
+      for (let i = 0; i <= dogsToPaginate.length; i += 8) {
+        inChunks.push(dogsToPaginate.slice(i, i + 8));
+      };
+      return {
+        ...state,
+        display: inChunks,
       };
     default:
       return {
