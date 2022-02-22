@@ -1,9 +1,10 @@
 .filterBar {
-  background-image: url("./lavander1.png");
-  background-size: cover;
-  background-color: rgb(204, 166, 209);
+  background-image: url("./paws.png");
+  background-size: repeat;
+  background-color: rgb(169, 136, 173);
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .filterOptions {
   display: flex;
@@ -12,28 +13,36 @@
   justify-content: space-between;
   height: 70px;
 }
-.temperamentsOption {
-  position: relative;
-}
-.temperamentsOption:hover .dropdown {
-  display: block;
-}
 
-.dropdown {
-  display: none;
-  position: absolute;
-  margin-left: -350%;
-  width: 450%;
-  z-index: 2;
-}
 .buttons-wrapper {
   display: flex;
   justify-content: flex-end;
-  margin: 15px 15px 15px 0px;
 }
-.filterButton {
-  margin-right: 15px;
+
+.hoverable-buttons {
+  position: relative;
+
+  background-color: rgb(150, 90, 135);
+  color: white;
+  border-radius: 15px;
+  font-size: 14px;
+  margin: 5px;
+  height: 50%;
 }
-/* #origin {
-    display: none;
-} */
+
+.hoverable-buttons:hover {
+  background-color: rgb(115, 60, 100);
+}
+
+.clear-button {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+}
+
+.drop {
+  border-radius: 15px;
+  height: 20px;
+  padding-left: 4px;
+  margin-left: 5px;
+}

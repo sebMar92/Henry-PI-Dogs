@@ -9,7 +9,7 @@ export default function CardDisplay() {
   const [page, setPage] = useState(0);
   const dispatch = useDispatch();
   let dogs = useSelector((state) => state.dogs);
-  let filtered = useSelector((state) => state.filtered.dogs);
+  let filtered = useSelector((state) => state.filtered);
   let ordered = useSelector((state) => state.order);
   let display = useSelector((state) => state.display);
   useEffect(() => {
@@ -29,10 +29,10 @@ export default function CardDisplay() {
     }
   }, [page]);
   useEffect(() => {
-    dispatch(changeOrder({ type: ordered.type, reverse: ordered.reverse }))
+    dispatch(changeOrder({ type: ordered.type, reverse: ordered.reverse }));
   }, [filtered, dogs]);
   useEffect(() => {
-    dispatch(paginate())
+    dispatch(paginate());
   }, [ordered]);
 
   if (!Array.isArray(display)) {
@@ -69,8 +69,8 @@ export default function CardDisplay() {
         >
           Prev
         </button>
-        {dogs.length &&
-          dogs.map((page, index) => (
+        {display.length &&
+          display.map((page, index) => (
             <button
               key={`btn-${index + 1}`}
               className="page-btn"

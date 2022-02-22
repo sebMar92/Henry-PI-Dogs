@@ -3,18 +3,15 @@ import {
   FILTER_DOGS,
   GET_ALL_TEMPERAMENTS,
   PAGINATE,
-  CHANGE_ORDER
+  CHANGE_ORDER,
 } from "../actions/index.js";
 
 const initialState = {
   dogs: [],
-  filtered: {
-    dogs: [],
-    isOn: false,
-  },
+  filtered: [],
   order: {
     dogs: [],
-    type: "weight",
+    type: "alphabet",
     reverse: false,
   },
   display: [],
@@ -25,6 +22,7 @@ const initialState = {
 function sortOrder(array, valueToCompare, optionalValue) {
   array.sort(function (a, b) {
     var dogA = a[valueToCompare] + optionalValue ? a[optionalValue] : "";
+    console.log(a.name, " ", dogA);
     var DogB = b[valueToCompare] + optionalValue ? b[optionalValue] : "";
     if (dogA < DogB) {
       return -1;
@@ -33,18 +31,18 @@ function sortOrder(array, valueToCompare, optionalValue) {
       return 1;
     }
     return 0;
-    });
+  });
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
     case GET_ALL_DOGS:
-        return {
-          ...state,
-          dogs: payload,
-        };
+      return {
+        ...state,
+        dogs: payload,
+      };
     case FILTER_DOGS:
-      const { original, temperaments, dogsByName } = payload;
+      const { origin, temperaments, dogsByName } = payload;
       let dogsForFilter = [];
       //-----------------Names
       if (dogsByName) {
@@ -60,12 +58,12 @@ function rootReducer(state = initialState, { type, payload }) {
         dogsForFilter = state.dogs;
       }
       //-----------------Origin
-      if (original !== null) {
-        if (original === "Created") {
+      if (origin !== "all") {
+        if (origin === "created") {
           dogsForFilter = dogsForFilter.filter((dog) =>
             dog.hasOwnProperty("fromDatabase")
           );
-        } else {
+        } else if (origin === "original") {
           dogsForFilter = dogsForFilter.filter(
             (dog) => !dog.hasOwnProperty("fromDatabase")
           );
@@ -103,10 +101,7 @@ function rootReducer(state = initialState, { type, payload }) {
       }
       return {
         ...state,
-        filtered: {
-          dogs: dogsForFilter,
-          isOn: true,
-        }
+        filtered: dogsForFilter,
       };
     case GET_ALL_TEMPERAMENTS:
       payload.sort(function (a, b) {
@@ -125,7 +120,9 @@ function rootReducer(state = initialState, { type, payload }) {
         temperaments: payload,
       };
     case CHANGE_ORDER:
-      let dogsToOrder = state.filtered.isOn ? state.filtered.dogs : state.dogs
+      let dogsToOrder = [
+        ...(state.filtered.length > 0 ? state.filtered : state.dogs),
+      ];
       if (payload.type === "alphabet") {
         sortOrder(dogsToOrder, "name");
       } else if (payload.type === "weight") {
@@ -142,14 +139,14 @@ function rootReducer(state = initialState, { type, payload }) {
           dogs: dogsToOrder,
           type: payload.type,
           reverse: payload.reverse,
-        }
+        },
       };
-    case PAGINATE: 
+    case PAGINATE:
       let dogsToPaginate = state.order.dogs;
       let inChunks = [];
       for (let i = 0; i <= dogsToPaginate.length; i += 8) {
         inChunks.push(dogsToPaginate.slice(i, i + 8));
-      };
+      }
       return {
         ...state,
         display: inChunks,

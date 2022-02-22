@@ -5,7 +5,7 @@ export const GET_ALL_TEMPERAMENTS = "GET_ALL_TEMPERAMENTS";
 export const FILTER_DOGS = "FILTER_DOGS";
 export const POST_DOG = "POST_DOG";
 export const CHANGE_ORDER = "CHANGE_ORDER";
-export const PAGINATE = "PAGINATE"
+export const PAGINATE = "PAGINATE";
 
 export function getDogs() {
   return async function (dispatch) {
@@ -16,15 +16,15 @@ export function getDogs() {
     });
   };
 }
-export function filterDogs(original, temperaments, name) {
+export function filterDogs(origin, temperaments, name) {
   return async function (dispatch) {
     var dogsByName = null;
-    if (name) {
+    if (name !== "") {
       dogsByName = await axios.get(`http://localhost:3001/dogs?name=${name}`);
       return dispatch({
         type: FILTER_DOGS,
         payload: {
-          original,
+          origin,
           temperaments,
           dogsByName: dogsByName.data,
         },
@@ -33,7 +33,7 @@ export function filterDogs(original, temperaments, name) {
     return dispatch({
       type: FILTER_DOGS,
       payload: {
-        original: original,
+        origin: origin,
         temperaments: temperaments,
         dogsByName: dogsByName,
       },
@@ -62,10 +62,10 @@ export function changeOrder(orderData) {
   return {
     type: CHANGE_ORDER,
     payload: orderData,
-  }
+  };
 }
-export function paginate(){
+export function paginate() {
   return {
     type: PAGINATE,
-  }
+  };
 }
