@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getDogs, changeOrder, paginate } from "../../actions/index.js";
 import DogCard from "../DogCard/DogCard.jsx";
 import "./CardDisplay.css";
@@ -17,7 +18,7 @@ export default function CardDisplay() {
   }, []);
   useEffect(() => {
     setPage(0);
-  }, [dogs]);
+  }, [display]);
   useEffect(() => {
     const prev = document.getElementById("prev");
     const next = document.getElementById("next");
@@ -43,49 +44,63 @@ export default function CardDisplay() {
     );
   }
   return (
-    <div>
+    <div id="display-container">
+      <div id="pages-container">
+        <div id="pages">
+          {display.length &&
+            display.map((page, index) => (
+              <button
+                key={`btn-${index + 1}`}
+                className="page-btn"
+                id={index}
+                onClick={(e) => setPage(Number(e.target.id))}
+              >
+                {index + 1}
+              </button>
+            ))}
+        </div>
+      </div>
+
+      <div
+        id="prev"
+        className="page-buttons"
+        onClick={
+          page === 0
+            ? () => {}
+            : (e) => setPage((currentPage) => currentPage - 1)
+        }
+      >
+        <p>{page === 0 ? "|" : "<"}</p>
+      </div>
       <div className="display">
         {display.length &&
           display[page] &&
           display[page].map((dog) => (
-            <DogCard
-              key={dog.id}
-              id={dog.id}
-              name={dog.name}
-              minHeight={dog.minHeight}
-              maxHeight={dog.maxHeight}
-              minWeight={dog.minWeight}
-              maxWeight={dog.maxWeight}
-              lifespan={dog.lifespan}
-              image={dog.image}
-              temperaments={dog.temperament}
-            />
+            <Link key={dog.id} to={`/home/${dog.id}`}>
+              <DogCard
+                id={dog.id}
+                name={dog.name}
+                minHeight={dog.minHeight}
+                maxHeight={dog.maxHeight}
+                minWeight={dog.minWeight}
+                maxWeight={dog.maxWeight}
+                lifespan={dog.lifespan}
+                image={dog.image}
+                temperaments={dog.temperament}
+              />
+            </Link>
           ))}
       </div>
-      <div>
-        <button
-          id="prev"
-          onClick={(e) => setPage((currentPage) => currentPage - 1)}
-        >
-          Prev
-        </button>
-        {display.length &&
-          display.map((page, index) => (
-            <button
-              key={`btn-${index + 1}`}
-              className="page-btn"
-              id={index}
-              onClick={(e) => setPage(Number(e.target.id))}
-            >
-              {index + 1}
-            </button>
-          ))}
-        <button
-          id="next"
-          onClick={(e) => setPage((currentPage) => currentPage + 1)}
-        >
-          Next
-        </button>
+      <div
+        id="next"
+        className="page-buttons"
+        onClick={
+          page === display.length - 1
+            ? () => {}
+            : (e) => setPage((currentPage) => currentPage + 1)
+        }
+      >
+        <p>{page === display.length - 1 ? "|" : ">"}</p>
       </div>
     </div>
   );

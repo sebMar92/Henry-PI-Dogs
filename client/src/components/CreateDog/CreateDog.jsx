@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { postDog } from "../../actions/index.js";
 import CreateTemperaments from "./CreateTemperaments/CreateTemperaments";
-import CreateDogCard from "./CreateDogCard/CreateDogCard.jsx";
+import DogCard from "../DogCard/DogCard.jsx";
+
 import "./CreateDog.css";
 
 export default function CreateDog() {
@@ -26,19 +27,19 @@ export default function CreateDog() {
     height: "",
     minWeight: "",
     maxWeight: "",
-    weigth: "",
+    weight: "",
     minLife_span: "",
     maxLife_span: "",
     lifespan: "",
     image: "",
   });
+  const dispatch = useDispatch();
   useEffect(() => {
     setState({
       ...state,
       lifespan: `${state.minLife_span} - ${state.maxLife_span} years`,
     });
   }, [state.minLife_span, state.maxLife_span]);
-  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postDog(state));
@@ -152,26 +153,34 @@ export default function CreateDog() {
       });
     }
   }, [state.minLife_span, state.maxLife_span]);
+  const imageIsOkey = (url) => {
+    setError({
+      ...error,
+      image: "",
+    });
+    setState({
+      ...state,
+      image: url,
+    });
+  };
+  const imageIsNotOkey = () => {
+    setError({
+      ...error,
+      image: "Paste an image URL or leave the input blank.",
+    });
+    setState({
+      ...state,
+      image: "",
+    });
+  };
   const validateURL = (url) => {
     if (url) {
       new Promise((resolve) => {
         const img = new Image();
 
         img.src = url;
-        img.onload = () =>
-          resolve(
-            setError({
-              ...error,
-              image: "",
-            })
-          );
-        img.onerror = () =>
-          resolve(
-            setError({
-              ...error,
-              image: `Paste an image URL or leave the input blank.`,
-            })
-          );
+        img.onload = () => resolve(imageIsOkey(url));
+        img.onerror = () => resolve(imageIsNotOkey());
       });
     } else {
       setError({
@@ -179,10 +188,6 @@ export default function CreateDog() {
         image: "",
       });
     }
-    setState({
-      ...state,
-      image: url,
-    });
   };
 
   return (
@@ -275,7 +280,6 @@ export default function CreateDog() {
             <input
               className="full-input"
               name="image"
-              value={state.image}
               placeholder="Dog's picture..."
               onChange={(e) => validateURL(e.target.value, e.target.name)}
             ></input>
@@ -284,11 +288,16 @@ export default function CreateDog() {
           <input
             className="form-button"
             disabled={
-              error.name &&
-              error.height &&
-              error.weigth &&
-              error.image &&
-              error.lifespan
+              error.name ||
+              error.height ||
+              error.minHeight ||
+              error.maxHeight ||
+              error.weight ||
+              error.minWeight ||
+              error.maxWeight ||
+              error.lifespan ||
+              error.minLife_span ||
+              error.maxLife_span
             }
             type="submit"
             value="Create"
@@ -297,7 +306,7 @@ export default function CreateDog() {
         </form>
       </div>
       <CreateTemperaments stateChanger={temperamentChange} />
-      <CreateDogCard
+      <DogCard
         name={state.name}
         minHeight={state.minHeight}
         maxHeight={state.maxHeight}

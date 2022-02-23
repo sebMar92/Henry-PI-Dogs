@@ -2,6 +2,9 @@
   background-image: url("./paws.png");
   background-size: repeat;
   background-color: rgb(169, 136, 173);
+  position: sticky;
+  top: 60px;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;

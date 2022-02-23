@@ -9,7 +9,7 @@ export default function Details() {
   let allDogs = useSelector((state) => state.dogs);
   const { id } = useParams();
   let { name, height, weight, lifespan, image, temperaments } = allDogs.find(
-    (dog) => dog.id === id
+    (dog) => dog.id == id
   );
   useEffect(() => {
     dispatch(getDogs());

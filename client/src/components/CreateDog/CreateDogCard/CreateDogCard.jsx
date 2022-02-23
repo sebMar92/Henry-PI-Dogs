@@ -1,4 +1,5 @@
 import React from "react";
+import unknownDog from "./unknownDog.png";
 
 export default function DogCard({
   name,
@@ -13,7 +14,11 @@ export default function DogCard({
   return (
     <div className="card">
       <div className="imgContainer">
-        <img className="dogImage" src={image} alt="Pic not found" />
+        <img
+          className="dogImage"
+          src={image || unknownDog}
+          alt="Pic not found"
+        />
       </div>
       <div className="info">
         <p>{name}</p>
