@@ -1,10 +1,16 @@
-#temperament-list {
+.create-temperaments {
   display: flex;
   flex-direction: column;
-  height: 400px;
-  width: 170px;
+  width: 15%;
+  margin-left: 50px;
+}
+#temperament-list {
   overflow: scroll;
   overflow-x: hidden;
+  height: 400px;
+}
+#create-search {
+  width: 90%;
 }
 .custom-selected {
   margin: 5px;

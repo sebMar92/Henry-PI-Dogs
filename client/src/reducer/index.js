@@ -5,6 +5,7 @@ import {
   PAGINATE,
   CHANGE_ORDER,
 } from "../actions/index.js";
+import { sortOrder } from "../functions/functions.js";
 
 const initialState = {
   dogs: [],
@@ -18,21 +19,6 @@ const initialState = {
   detailedDog: [],
   temperaments: [],
 };
-
-function sortOrder(array, valueToCompare, optionalValue) {
-  array.sort(function (a, b) {
-    var dogA = a[valueToCompare] + optionalValue ? a[optionalValue] : "";
-    console.log(a.name, " ", dogA);
-    var DogB = b[valueToCompare] + optionalValue ? b[optionalValue] : "";
-    if (dogA < DogB) {
-      return -1;
-    }
-    if (dogA > DogB) {
-      return 1;
-    }
-    return 0;
-  });
-}
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
@@ -104,17 +90,7 @@ function rootReducer(state = initialState, { type, payload }) {
         filtered: dogsForFilter,
       };
     case GET_ALL_TEMPERAMENTS:
-      payload.sort(function (a, b) {
-        var nameA = a.name.toUpperCase();
-        var nameB = b.name.toUpperCase();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      });
+      sortOrder(payload, "name");
       return {
         ...state,
         temperaments: payload,

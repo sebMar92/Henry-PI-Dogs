@@ -3,20 +3,37 @@
   display: flex;
   flex-direction: column;
 }
-.input {
-  width: 70%;
-  margin: 1%;
+.full-input {
+  width: 550px;
+  margin-left: 1%;
 }
 .half-input {
-  width: 35%;
-  margin: 1%;
+  width: 271px;
 }
 .form-button {
   width: 15%;
-  margin: 1%;
+  margin-left: 1%;
 }
 #outter-create {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+}
+#inner-create {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.error-msg {
+  font-size: 14px;
+  color: rgb(143, 8, 8);
+  margin: 0;
+  margin-left: 2%;
+  width: 100%;
+}
+.group-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 1%;
 }

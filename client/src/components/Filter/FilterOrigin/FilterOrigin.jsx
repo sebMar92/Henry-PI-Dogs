@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import "./FilterOrigin.css";
 
 export default function FilterOrigin(props) {
@@ -7,7 +6,7 @@ export default function FilterOrigin(props) {
     <div className="originOptions hoverable-buttons">
       Filter by creation method
       <select
-        clssName="drop"
+        className="drop"
         id="origin"
         onChange={(e) => props.stateChanger(e.target.value)}
       >

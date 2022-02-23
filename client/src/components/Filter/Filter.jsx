@@ -26,7 +26,7 @@ export default function Filter() {
   };
   useEffect(() => {
     dispatch(filterDogs(originFilter, temperamentFilter, nameToSearch));
-  }, [temperamentFilter, originFilter, nameToSearch]);
+  }, [temperamentFilter, originFilter, nameToSearch, dispatch]);
 
   const handleButtons = () => {
     let allChecks = document.getElementsByClassName("filter-check");
