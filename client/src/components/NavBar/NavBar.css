@@ -8,7 +8,7 @@ nav {
   align-items: center;
   height: 60px;
   width: 100%;
-  background-color: rgb(115, 60, 100);
+  background-color: rgb(254, 67, 101);
 }
 
 .logo-wrapper {
@@ -24,7 +24,7 @@ nav {
   font-weight: 500;
   font-size: 14px;
   text-decoration: none;
-  background-color: rgb(150, 90, 135);
+  background-color: rgb(195, 53, 79);
   color: white;
   margin: 10px;
   border-radius: 15px;
@@ -33,5 +33,5 @@ nav {
 }
 
 .hoverable-links:hover {
-  background-color: rgb(177, 122, 163);
+  background-color: rgb(134, 36, 54);
 }

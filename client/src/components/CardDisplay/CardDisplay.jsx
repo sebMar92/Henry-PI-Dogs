@@ -20,15 +20,17 @@ export default function CardDisplay() {
     setPage(0);
   }, [display]);
   useEffect(() => {
-    const prev = document.getElementById("prev");
-    const next = document.getElementById("next");
-    if (prev && next) {
-      page === 0 ? (prev.disabled = true) : (prev.disabled = false);
-      page === dogs.length - 1
-        ? (next.disabled = true)
-        : (next.disabled = false);
+    const dots = document.getElementsByClassName("page-dot");
+    for (let dot of dots) {
+      if (page == dot.id) {
+        dot.className = "page-dot page-dot-selected";
+      } else if (Math.abs(page - dot.id) === 1) {
+        dot.className = "page-dot page-dot-adyacent";
+      } else {
+        dot.className = "page-dot";
+      }
     }
-  }, [page]);
+  }, [page, display]);
   useEffect(() => {
     dispatch(changeOrder({ type: ordered.type, reverse: ordered.reverse }));
   }, [filtered, dogs]);
@@ -49,14 +51,12 @@ export default function CardDisplay() {
         <div id="pages">
           {display.length &&
             display.map((page, index) => (
-              <button
+              <div
                 key={`btn-${index + 1}`}
-                className="page-btn"
                 id={index}
+                className="page-dot"
                 onClick={(e) => setPage(Number(e.target.id))}
-              >
-                {index + 1}
-              </button>
+              ></div>
             ))}
         </div>
       </div>

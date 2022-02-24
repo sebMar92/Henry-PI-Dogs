@@ -120,7 +120,7 @@ function rootReducer(state = initialState, { type, payload }) {
     case PAGINATE:
       let dogsToPaginate = state.order.dogs;
       let inChunks = [];
-      for (let i = 0; i <= dogsToPaginate.length; i += 8) {
+      for (let i = 0; i <= dogsToPaginate.length - 1; i += 8) {
         inChunks.push(dogsToPaginate.slice(i, i + 8));
       }
       return {

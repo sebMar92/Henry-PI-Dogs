@@ -9,8 +9,9 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 1%;
+
   flex-grow: 1;
+  justify-content: center;
 }
 
 .page-buttons {
@@ -26,44 +27,74 @@
 #prev {
   background: linear-gradient(
     90deg,
-    rgba(115, 60, 100, 0.6) 0%,
-    rgba(115, 60, 100, 0.4) 35%,
-    rgba(115, 60, 100, 0.2) 80%,
-    rgba(115, 60, 100, 0.05) 100%
+    rgba(119, 74, 72, 0.6) 0%,
+    rgba(119, 74, 72, 0.4) 35%,
+    rgba(119, 74, 72, 0.2) 80%,
+    rgba(119, 74, 72, 0.05) 100%
   );
 }
 #prev:hover {
   background: linear-gradient(
     90deg,
-    rgba(115, 60, 100, 0.8) 0%,
-    rgba(115, 60, 100, 0.5) 35%,
-    rgba(115, 60, 100, 0.3) 80%,
-    rgba(115, 60, 100, 0.1) 100%
+    rgba(119, 74, 72, 0.8) 0%,
+    rgba(119, 74, 72, 0.5) 35%,
+    rgba(119, 74, 72, 0.3) 80%,
+    rgba(119, 74, 72, 0.1) 100%
   );
 }
 #next {
   background: linear-gradient(
     90deg,
-    rgba(115, 60, 100, 0.05) 0%,
-    rgba(115, 60, 100, 0.2) 35%,
-    rgba(115, 60, 100, 0.4) 80%,
-    rgba(115, 60, 100, 0.6) 100%
+    rgba(119, 74, 72, 0.05) 0%,
+    rgba(119, 74, 72, 0.2) 35%,
+    rgba(119, 74, 72, 0.4) 80%,
+    rgba(119, 74, 72, 0.6) 100%
   );
 }
 #next:hover {
   background: linear-gradient(
     90deg,
-    rgba(115, 60, 100, 0.1) 0%,
-    rgba(115, 60, 100, 0.3) 35%,
-    rgba(115, 60, 100, 0.5) 80%,
-    rgba(115, 60, 100, 0.8) 100%
+    rgba(119, 74, 72, 0.1) 0%,
+    rgba(119, 74, 72, 0.3) 35%,
+    rgba(119, 74, 72, 0.5) 80%,
+    rgba(119, 74, 72, 0.8) 100%
   );
 }
 
 #pages-container {
   position: absolute;
   width: 100%;
-  top: 140px;
+  top: 160px;
   display: flex;
   justify-content: center;
+}
+#pages {
+  display: flex;
+  flex-direction: row;
+}
+.page-dot {
+  background-color: rgba(195, 53, 79, 0.5);
+  margin-left: 3px;
+  margin-right: 3px;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}
+.page-dot:hover {
+  margin-top: -2px;
+  width: 15px;
+  height: 15px;
+  background-color: rgba(175, 48, 71, 0.8);
+}
+.page-dot-selected {
+  margin-top: -3px;
+  width: 15px;
+  height: 15px;
+  background-color: rgba(175, 48, 71, 0.8);
+}
+.page-dot-adyacent {
+  margin-top: -1px;
+  width: 12px;
+  height: 12px;
+  background-color: rgba(175, 48, 71, 0.6);
 }

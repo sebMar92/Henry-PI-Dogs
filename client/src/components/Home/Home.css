@@ -1,5 +1,6 @@
 .home {
   background-size: cover;
-  background-color: rgb(220, 205, 220);
+  background-color: rgb(248, 216, 193);
   width: 100%;
+  user-select: none;
 }

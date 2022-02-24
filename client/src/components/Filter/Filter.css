@@ -1,7 +1,6 @@
 .filterBar {
   background-image: url("./paws.png");
-  background-size: repeat;
-  background-color: rgb(169, 136, 173);
+  background-color: rgb(252, 157, 154);
   position: sticky;
   top: 60px;
   z-index: 2;
@@ -25,7 +24,7 @@
 .hoverable-buttons {
   position: relative;
 
-  background-color: rgb(150, 90, 135);
+  background-color: rgb(189, 121, 118);
   color: white;
   border-radius: 15px;
   font-size: 14px;
@@ -34,7 +33,7 @@
 }
 
 .hoverable-buttons:hover {
-  background-color: rgb(115, 60, 100);
+  background-color: rgb(134, 88, 85);
 }
 
 .clear-button {
