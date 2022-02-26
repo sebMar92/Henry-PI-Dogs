@@ -53,9 +53,11 @@
 }
 h2 {
   color: rgb(134, 88, 85);
+  text-shadow: 0px 0px 1px rgb(255, 255, 255);
 }
 h3 {
   color: rgb(134, 88, 85);
+  text-shadow: 0px 0px 1px rgb(255, 255, 255);
 }
 #created-card {
   display: flex;
