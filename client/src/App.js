@@ -8,6 +8,11 @@ import CreateDog from "./components/CreateDog/CreateDog";
 import Landing from "./components/Landing/Landing";
 import Details from "./components/Details/Details";
 
+import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
+
 function App() {
   return (
     <div id="app">

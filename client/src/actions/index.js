@@ -9,7 +9,7 @@ export const PAGINATE = "PAGINATE";
 
 export function getDogs() {
   return async function (dispatch) {
-    var dogs = await axios.get("http://localhost:3001/dogs");
+    var dogs = await axios.get("/dogs");
     return dispatch({
       type: GET_ALL_DOGS,
       payload: dogs.data,
@@ -20,7 +20,7 @@ export function filterDogs(origin, temperaments, name) {
   return async function (dispatch) {
     var dogsByName = null;
     if (name !== "") {
-      dogsByName = await axios.get(`http://localhost:3001/dogs?name=${name}`);
+      dogsByName = await axios.get(`/dogs?name=${name}`);
       return dispatch({
         type: FILTER_DOGS,
         payload: {
@@ -42,7 +42,7 @@ export function filterDogs(origin, temperaments, name) {
 }
 export function getTemperaments() {
   return async function (dispatch) {
-    var temperaments = await axios.get("http://localhost:3001/temperament");
+    var temperaments = await axios.get("/temperament");
     return dispatch({
       type: GET_ALL_TEMPERAMENTS,
       payload: temperaments.data,
@@ -51,7 +51,7 @@ export function getTemperaments() {
 }
 export function postDog(dog) {
   return async function (dispatch) {
-    var status = await axios.post("http://localhost:3001/dog", dog);
+    var status = await axios.post("/dog", dog);
     return dispatch({
       type: POST_DOG,
       payload: status.data,
