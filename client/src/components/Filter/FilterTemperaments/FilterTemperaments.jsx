@@ -9,7 +9,7 @@ export default function FilterTemperaments(props) {
   const allTemperaments = useSelector((state) => state.temperaments);
   useEffect(() => {
     dispatch(getTemperaments());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="temperamentsOption hoverable-buttons">
       <p id="temperamentTitle" /> Filter by temperaments

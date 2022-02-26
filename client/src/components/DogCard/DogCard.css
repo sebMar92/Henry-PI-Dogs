@@ -1,16 +1,27 @@
-.card {
+.outter-card {
   margin: 20px;
-  width: 350px;
-  height: 350px;
+  width: 40vh;
+  height: 40vh;
+  border-radius: 25px;
+}
+
+.card {
+  width: 95%;
+  height: 95%;
   border-radius: 25px;
   position: relative;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
+
 .card:hover {
+  transition: all 75ms;
   transform: scale(1.1);
   box-shadow: 0px 4px 4px 0px rgb(255, 255, 255);
   border: 2px solid white;
+}
+.card:hover .hidden {
+  display: block;
 }
 .imgContainer {
   overflow: hidden;
@@ -29,20 +40,29 @@
 .info {
   color: rgb(34, 34, 34);
   font-weight: 700;
+  text-shadow: 0px 0px 4px rgb(255, 255, 255);
   overflow-wrap: break-word;
   word-wrap: break-word;
+  padding: 5px;
+  padding-left: 10px;
   line-height: 100%;
   background: linear-gradient(
     0deg,
     rgba(255, 255, 255, 0.7) 0%,
     rgba(255, 255, 255, 0.5) 35%,
-    rgba(255, 255, 255, 0.3) 80%,
-    rgba(255, 255, 255, 0.1) 100%
+    rgba(255, 255, 255, 0.3) 70%,
+    rgba(255, 255, 255, 0.1) 90%,
+    rgba(255, 255, 255, 0.05) 100%
   );
-  border-radius: 15px;
-  border: 0, 1px solid black;
+
   position: absolute;
   left: 0%;
   bottom: 0%;
   width: 100%;
+}
+.main {
+  font-size: 20px;
+}
+.hidden {
+  display: none;
 }

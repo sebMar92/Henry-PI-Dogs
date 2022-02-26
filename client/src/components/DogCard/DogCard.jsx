@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import unknownDog from "./unknownDog.png";
+
 import "./DogCard.css";
 export default function DogCard({
   name,
@@ -14,20 +13,24 @@ export default function DogCard({
   temperaments,
 }) {
   return (
-    <div className="card">
-      <div className="imgContainer">
-        <img
-          className="dogImage"
-          src={image || unknownDog}
-          alt="Pic not found"
-        />
-      </div>
-      <div className="info">
-        <p>{name}</p>
-        <p>Height: {`${minHeight} - ${maxHeight}`}</p>
-        <p>Weight: {`${minWeight} - ${maxWeight}`}</p>
-        <p>Lifespan: {lifespan}</p>
-        <p>Temperaments: {temperaments && temperaments.join(", ")}</p>
+    <div className="outter-card">
+      <div className="card">
+        <div className="imgContainer">
+          <img
+            className="dogImage"
+            src={image || "/images/unknownDog.png"}
+            alt="Pic not found"
+          />
+        </div>
+        <div className="info">
+          <p className="main">{name}</p>
+          <p className="hidden">Height: {`${minHeight} - ${maxHeight}`}</p>
+          <p className="hidden">Weight: {`${minWeight} - ${maxWeight}`}</p>
+          <p className="hidden">Lifespan: {lifespan}</p>
+          <p className="hidden">
+            Temperaments: {temperaments && temperaments.join(", ")}
+          </p>
+        </div>
       </div>
     </div>
   );

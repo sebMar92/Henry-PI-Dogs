@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import dogLogo from "./dogLogo.png";
 import "./NavBar.css";
 export default function NavBar() {
   return (
     <nav>
       <div className="logo-wrapper">
-        <img id="logoNav" src="https://picsum.photos/45" alt="Random logo" />
+        <Link to="/home">
+          <img id="logoNav" src={dogLogo} alt="Dogo logo" />
+        </Link>
       </div>
       <Link className="hoverable-links" to="/home">
         <div>

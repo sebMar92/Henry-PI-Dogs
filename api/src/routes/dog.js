@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { Dog } = require("../db.js");
+const { Dog, Temperament } = require("../db.js");
+const { getTemperaments } = require("../functions/functions.js");
 
 router.post("", async function (req, res) {
   const {
@@ -12,20 +13,29 @@ router.post("", async function (req, res) {
     image,
     temperaments,
   } = req.body;
-  const doge = await Dog.create({
-    name: name,
-    minHeight: minHeight,
-    maxHeight: maxHeight,
-    minWeight: minWeight,
-    maxWeight: maxWeight,
-    lifespan: lifespan,
-    image: image,
-  });
-  temperaments.forEach(async (t) => {
-    console.log(t);
-    await doge.addTemperament(t);
-  });
-  res.send(doge);
+  if (name && minHeight && maxHeight && minWeight && maxWeight && lifespan) {
+    const doge = await Dog.create({
+      name: name,
+      minHeight: minHeight,
+      maxHeight: maxHeight,
+      minWeight: minWeight,
+      maxWeight: maxWeight,
+      lifespan: lifespan,
+      image: image,
+    });
+    if (temperaments) {
+      let dbTemperaments = await Temperament.findAll();
+      if (dbTemperaments.length < 1) {
+        await getTemperaments();
+      }
+      temperaments.forEach(async (t) => {
+        await doge.addTemperament(t);
+      });
+    }
+    return res.send({ msg: "Dog bread succesfully created" });
+  } else {
+    return res.send({ error: "Missing necessary data to create a dog" });
+  }
 });
 
 module.exports = router;

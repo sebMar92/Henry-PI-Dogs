@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postDog } from "../../actions/index.js";
 import CreateTemperaments from "./CreateTemperaments/CreateTemperaments";
@@ -16,7 +17,7 @@ export default function CreateDog() {
     minLife_span: "",
     maxLife_span: "",
     lifespan: "",
-    image: "",
+    image: "/images/unknownDog.png",
     temperaments: [],
     temperamentsName: [],
   });
@@ -33,6 +34,8 @@ export default function CreateDog() {
     lifespan: "",
     image: "",
   });
+  const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     setState({
@@ -43,10 +46,15 @@ export default function CreateDog() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postDog(state));
+    setSubmitting(true);
+    setTimeout(() => {
+      navigate("/home");
+    }, 750);
   };
   const temperamentChange = (id, name) => {
     setState({ ...state, temperaments: id, temperamentsName: name });
   };
+
   const validateNumber = (value, Type) => {
     if (!value) {
       setError({
@@ -170,7 +178,7 @@ export default function CreateDog() {
     });
     setState({
       ...state,
-      image: "",
+      image: "/images/unknownDog.png",
     });
   };
   const validateURL = (url) => {
@@ -187,135 +195,171 @@ export default function CreateDog() {
         ...error,
         image: "",
       });
+      setState({
+        ...state,
+        image: "/images/unknownDog.png",
+      });
     }
   };
 
   return (
     <div id="outter-create">
-      <div id="inner-create">
-        <form
-          className="form"
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          <input
-            className="full-input"
-            name="name"
-            value={state.name}
-            placeholder="Dog's breed name..."
-            onChange={(e) => validateName(e.target.value)}
-          ></input>
-          <p className="error-msg">{error.name}</p>
-          <div className="group-input">
-            <div>
-              <input
-                className="half-input"
-                name="minHeight"
-                placeholder="Dog's min height..."
-                onChange={(e) => validateNumber(e.target.value, e.target.name)}
-              ></input>
-              <p className="error-msg">{error.minHeight}</p>
-            </div>
-            <div>
-              <input
-                className="half-input"
-                name="maxHeight"
-                value={state.maxHeight}
-                placeholder="Dog's max height..."
-                onChange={(e) => validateNumber(e.target.value, e.target.name)}
-              ></input>
-              <p className="error-msg">{error.maxHeight}</p>
-              <p className="error-msg">{error.height}</p>
-            </div>
-          </div>
-          <div className="group-input">
-            <div>
-              <input
-                className="half-input"
-                name="minWeight"
-                value={state.minWeight}
-                placeholder="Dog's min weight..."
-                onChange={(e) => validateNumber(e.target.value, e.target.name)}
-              ></input>
-              <p className="error-msg">{error.minWeight}</p>
-            </div>
-            <div>
-              {" "}
-              <input
-                className="half-input"
-                name="maxWeight"
-                value={state.maxWeight}
-                placeholder="Dog's max weight..."
-                onChange={(e) => validateNumber(e.target.value, e.target.name)}
-              ></input>
-              <p className="error-msg">{error.maxWeight}</p>
-              <p className="error-msg">{error.weight}</p>
-            </div>
-          </div>
-          <div className="group-input">
-            <div>
-              <input
-                className="half-input"
-                name="minLife_span"
-                value={state.minLife_span}
-                placeholder="Dog's min Life..."
-                onChange={(e) => validateNumber(e.target.value, e.target.name)}
-              ></input>
-              <p className="error-msg">{error.minLife_span}</p>
-            </div>
-            <div>
-              <input
-                className="half-input"
-                name="maxLife_span"
-                value={state.maxLife_span}
-                placeholder="Dog's max Life..."
-                onChange={(e) => validateNumber(e.target.value, e.target.name)}
-              ></input>
-              <p className="error-msg">{error.maxLife_span}</p>
-              <p className="error-msg">{error.lifespan}</p>
-            </div>
-          </div>
-          <div>
+      <div id="created-card" className={submitting ? "animate" : ""}>
+        <DogCard
+          name={state.name}
+          minHeight={state.minHeight}
+          maxHeight={state.maxHeight}
+          minWeight={state.minWeight}
+          maxWeight={state.maxWeight}
+          lifespan={state.lifespan}
+          image={state.image}
+          temperaments={state.temperamentsName}
+        />
+      </div>
+      <div>
+        <h2>Create your dog breed</h2>
+        <div id="inner-create">
+          <form
+            className="form"
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
             <input
               className="full-input"
-              name="image"
-              placeholder="Dog's picture..."
-              onChange={(e) => validateURL(e.target.value, e.target.name)}
+              name="name"
+              required
+              value={state.name}
+              placeholder="Dog's breed name..."
+              onChange={(e) => validateName(e.target.value)}
             ></input>
-            <p className="error-msg">{error.image}</p>
-          </div>
-          <input
-            className="form-button"
-            disabled={
-              error.name ||
-              error.height ||
-              error.minHeight ||
-              error.maxHeight ||
-              error.weight ||
-              error.minWeight ||
-              error.maxWeight ||
-              error.lifespan ||
-              error.minLife_span ||
-              error.maxLife_span
-            }
-            type="submit"
-            value="Create"
-            onClick={handleSubmit}
-          />
-        </form>
+            <p className="error-msg">{error.name}</p>
+            <div className="group-input">
+              <div>
+                <input
+                  className="half-input"
+                  name="minHeight"
+                  required
+                  placeholder="Dog's min height..."
+                  onChange={(e) =>
+                    validateNumber(e.target.value, e.target.name)
+                  }
+                ></input>
+                <p className="error-msg">{error.minHeight}</p>
+              </div>
+              <div>
+                <input
+                  className="half-input"
+                  name="maxHeight"
+                  required
+                  value={state.maxHeight}
+                  placeholder="Dog's max height..."
+                  onChange={(e) =>
+                    validateNumber(e.target.value, e.target.name)
+                  }
+                ></input>
+                <p className="error-msg">{error.maxHeight}</p>
+                <p className="second-error error-msg">{error.height}</p>
+              </div>
+            </div>
+            <div className="group-input">
+              <div>
+                <input
+                  className="half-input"
+                  name="minWeight"
+                  required
+                  value={state.minWeight}
+                  placeholder="Dog's min weight..."
+                  onChange={(e) =>
+                    validateNumber(e.target.value, e.target.name)
+                  }
+                ></input>
+                <p className="error-msg">{error.minWeight}</p>
+              </div>
+              <div>
+                {" "}
+                <input
+                  className="half-input"
+                  name="maxWeight"
+                  required
+                  value={state.maxWeight}
+                  placeholder="Dog's max weight..."
+                  onChange={(e) =>
+                    validateNumber(e.target.value, e.target.name)
+                  }
+                ></input>
+                <p className="error-msg">{error.maxWeight}</p>
+                <p className="second-error error-msg">{error.weight}</p>
+              </div>
+            </div>
+            <div className="group-input">
+              <div>
+                <input
+                  className="half-input"
+                  name="minLife_span"
+                  required
+                  value={state.minLife_span}
+                  placeholder="Dog's min Life..."
+                  onChange={(e) =>
+                    validateNumber(e.target.value, e.target.name)
+                  }
+                ></input>
+                <p className="error-msg">{error.minLife_span}</p>
+              </div>
+              <div>
+                <input
+                  className="half-input"
+                  name="maxLife_span"
+                  required
+                  value={state.maxLife_span}
+                  placeholder="Dog's max Life..."
+                  onChange={(e) =>
+                    validateNumber(e.target.value, e.target.name)
+                  }
+                ></input>
+                <p className="error-msg">{error.maxLife_span}</p>
+                <p className="second-error error-msg">{error.lifespan}</p>
+              </div>
+            </div>
+            <div>
+              <input
+                className="full-input"
+                name="image"
+                placeholder="Dog's picture..."
+                onChange={(e) => validateURL(e.target.value, e.target.name)}
+              ></input>
+              <p className="error-msg">{error.image}</p>
+            </div>
+            <input
+              className="form-button"
+              disabled={
+                error.name ||
+                error.height ||
+                error.minHeight ||
+                error.maxHeight ||
+                error.weight ||
+                error.minWeight ||
+                error.maxWeight ||
+                error.lifespan ||
+                error.minLife_span ||
+                error.maxLife_span ||
+                state.name === "" ||
+                state.minHeight === "" ||
+                state.maxHeight === "" ||
+                state.minWeight === "" ||
+                state.maxWeight === "" ||
+                state.minLife_span === "" ||
+                state.maxLife_span === ""
+              }
+              type="submit"
+              value="Create"
+              onClick={handleSubmit}
+            />
+          </form>
+        </div>
       </div>
+
       <CreateTemperaments stateChanger={temperamentChange} />
-      <DogCard
-        name={state.name}
-        minHeight={state.minHeight}
-        maxHeight={state.maxHeight}
-        minWeight={state.minWeight}
-        maxWeight={state.maxWeight}
-        lifespan={state.lifespan}
-        image={state.image}
-        temperaments={state.temperamentsName}
-      />
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function CreateTemperaments(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTemperaments());
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     setAllTemperaments(
       storeTemperaments.map(
@@ -79,6 +79,7 @@ export default function CreateTemperaments(props) {
   };
   return (
     <div className="create-temperaments">
+      <h3>Pick some temperaments</h3>
       <div>
         <input
           type="text"

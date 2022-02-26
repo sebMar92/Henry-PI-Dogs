@@ -21,7 +21,7 @@ export default function Order() {
   };
   useEffect(() => {
     dispatch(changeOrder(order));
-  }, [order]);
+  }, [order, dispatch]);
   return (
     <div className="orderOptions hoverable-buttons">
       Order by

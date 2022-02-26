@@ -23,6 +23,7 @@
   display: none;
   border-radius: 10px;
   background-color: rgb(134, 88, 85);
+  text-shadow: 0px 0px 1px black;
   box-shadow: 16px 16px 16px -16px rgba(0, 0, 0, 1);
   padding: 16px;
   padding-bottom: 6px;

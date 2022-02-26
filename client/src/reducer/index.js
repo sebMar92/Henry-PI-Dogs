@@ -60,7 +60,7 @@ function rootReducer(state = initialState, { type, payload }) {
           return {
             ...state,
             display: {
-              error: "No hay razas de perro que matcheen esos filtros",
+              error: "There aren't dog breeds that match those filters",
             },
           };
         }
@@ -80,7 +80,7 @@ function rootReducer(state = initialState, { type, payload }) {
           return {
             ...state,
             display: {
-              error: "No hay razas de perro que matcheen esos filtros",
+              error: "There aren't dog breeds that match those filters.",
             },
           };
         }

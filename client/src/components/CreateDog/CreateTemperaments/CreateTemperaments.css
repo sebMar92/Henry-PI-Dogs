@@ -11,22 +11,25 @@
 }
 #create-search {
   width: 90%;
+  height: 25px;
 }
 .custom-selected {
   margin: 5px;
-  border-top: 1px solid rgb(170, 170, 170, 0.5);
-  background-color: rgb(170, 170, 170);
+  border-top: 1px solid rgb(189, 121, 118, 0.5);
+  background-color: rgb(134, 36, 54);
+  color: white;
 }
 
 .custom-selected:hover {
-  background-color: rgb(109, 109, 109);
+  background-color: rgb(54, 23, 23);
 }
 
 .custom-create {
   margin: 5px;
-  border-top: 1px solid rgb(170, 170, 170, 0.5);
+  border-top: 1px solid rgb(189, 121, 118, 0.5);
 }
 
 .custom-create:hover {
-  background-color: rgb(170, 170, 170);
+  background-color: rgb(189, 121, 118);
+  color: white;
 }

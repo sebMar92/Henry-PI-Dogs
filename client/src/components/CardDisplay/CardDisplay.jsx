@@ -40,7 +40,7 @@ export default function CardDisplay() {
 
   if (!Array.isArray(display)) {
     return (
-      <div className="display">
+      <div className="display-error">
         <p>{display.error}</p>
       </div>
     );
@@ -49,14 +49,15 @@ export default function CardDisplay() {
     <div id="display-container">
       <div id="pages-container">
         <div id="pages">
-          {display.length &&
+          {display.length > 0 &&
             display.map((page, index) => (
-              <div
-                key={`btn-${index + 1}`}
-                id={index}
-                className="page-dot"
-                onClick={(e) => setPage(Number(e.target.id))}
-              ></div>
+              <div key={`btn-${index + 1}`} className="outter-dot">
+                <div
+                  id={index}
+                  className="page-dot"
+                  onClick={(e) => setPage(Number(e.target.id))}
+                ></div>
+              </div>
             ))}
         </div>
       </div>
@@ -73,7 +74,7 @@ export default function CardDisplay() {
         <p>{page === 0 ? "|" : "<"}</p>
       </div>
       <div className="display">
-        {display.length &&
+        {display.length > 0 &&
           display[page] &&
           display[page].map((dog) => (
             <Link key={dog.id} to={`/home/${dog.id}`}>

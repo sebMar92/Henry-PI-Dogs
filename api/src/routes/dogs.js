@@ -1,19 +1,18 @@
 const router = require("express").Router();
-const { Dog, Temperament } = require("../db.js");
-const { YOUR_API_KEY } = process.env;
-const { getAllDogs } = require("../functions/getDogs.js");
-const db = require("../db.js");
+const { getAllDogs } = require("../functions/functions.js");
 
 router.get("", async function (req, res) {
   const { name } = req.query;
   if (name) {
     const allDogs = await getAllDogs();
-    const dogos = allDogs.filter((d) =>
-      d.name.toLowerCase().includes(name.toLowerCase())
+    const searchedDogs = allDogs.filter((dog) =>
+      dog.name.toLowerCase().includes(name.toLowerCase())
     );
-    return dogos.length > 0
-      ? res.send(dogos)
-      : res.send({ error: "No se encuentra la raza buscada." });
+    return searchedDogs.length > 0
+      ? res.send(searchedDogs)
+      : res.send({
+          error: `There aren't any dog breads that include "${name}" in their name.`,
+        });
   }
   res.send(await getAllDogs());
 });
@@ -21,10 +20,10 @@ router.get("", async function (req, res) {
 router.get("/:id", async function (req, res) {
   const { id } = req.params;
   const allDogs = await getAllDogs();
-  const dogo = allDogs.find((d) => d.id == id);
-  return dogo
-    ? res.send(dogo)
-    : res.send({ error: "El id no corresponde a ninguna raza." });
+  const dogById = allDogs.find((dog) => dog.id == id);
+  return dogById
+    ? res.send(dogById)
+    : res.send({ error: "The id doesn't match any dog bread." });
 });
 
 module.exports = router;

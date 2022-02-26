@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import { useDispatch } from "react-redux";
 import { filterDogs } from "../../actions/index.js";
 import FilterTemperaments from "./FilterTemperaments/FilterTemperaments.jsx";
@@ -39,20 +40,28 @@ export default function Filter() {
     setOriginFilter("all");
     setTemperamentFilter([]);
   };
-
-  return (
-    <div className="filterBar">
-      <div className="filterOptions">
-        <FilterTemperaments stateChanger={temperamentChange} />
-        <FilterOrigin stateChanger={setOriginFilter} />
-        <FilterName stateChanger={nameChange} />
-        <div className="hoverable-buttons clear-button">
-          <p onClick={() => handleButtons()}>Clear</p>
+  const { id } = useParams();
+  if (id) {
+    return (
+      <div className="filterBar">
+        <div className="filterOptions"></div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="filterBar">
+        <div className="filterOptions">
+          <FilterTemperaments stateChanger={temperamentChange} />
+          <FilterOrigin stateChanger={setOriginFilter} />
+          <FilterName stateChanger={nameChange} />
+          <div className="hoverable-buttons clear-button">
+            <p onClick={() => handleButtons()}>Clear</p>
+          </div>
+        </div>
+        <div>
+          <Order id="order-out" />
         </div>
       </div>
-      <div>
-        <Order />
-      </div>
-    </div>
-  );
+    );
+  }
 }

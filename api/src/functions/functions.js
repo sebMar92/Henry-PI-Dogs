@@ -2,23 +2,23 @@ const { Dog, Temperament } = require("../db.js");
 const { YOUR_API_KEY } = process.env;
 const axios = require("axios");
 
-const inchesToCentimeter = function(value){
+const inchesToCentimeters = function (value) {
   return value * 2.54;
 };
 
-const poundsToKilograms = function(value){
-  return value * 0.45; 
+const poundsToKilograms = function (value) {
+  return value * 0.45;
 };
 
-const parseData = function ([min, max]){
+const parseData = function ([min, max]) {
   let parseMin = parseFloat(min);
   let parseMax = parseFloat(max);
   parseMin = isNaN(parseMin) ? parseMax : parseMin;
   parseMax = isNaN(parseMax) ? parseMin : parseMax;
 
-  return [parseMin, parseMax]
+  return [parseMin, parseMax];
 };
-
+//-----get api dogs
 const getApiDogs = async function () {
   const apiInfo = await axios.get(
     `https://api.thedogapi.com/v1/breeds?apikey=${YOUR_API_KEY}`
@@ -27,12 +27,12 @@ const getApiDogs = async function () {
   const apiDogs = await apiInfo.data.map((e) => {
     const [minWeight, maxWeight] = parseData(e.weight.imperial.split(" - "));
     const [minHeight, maxHeight] = parseData(e.height.imperial.split(" - "));
-    
+
     return {
       name: e.name,
       id: e.id,
-      maxHeight: Math.round(inchesToCentimeter(maxHeight)),
-      minHeight: Math.round(inchesToCentimeter(minHeight)),
+      maxHeight: Math.round(inchesToCentimeters(maxHeight)),
+      minHeight: Math.round(inchesToCentimeters(minHeight)),
       minWeight: Math.round(poundsToKilograms(minWeight)),
       maxWeight: Math.round(poundsToKilograms(maxWeight)),
       lifespan: e.life_span,
@@ -46,6 +46,7 @@ const getApiDogs = async function () {
   });
   return temperamentsToArray;
 };
+//-----get database dogs
 const getDbDogs = async function () {
   const dbDogs = await Dog.findAll({
     attributes: [
@@ -83,8 +84,27 @@ const getAllDogs = async function () {
   return dbDogs.concat(apiDogs);
 };
 
+const getTemperaments = async function () {
+  const allDogs = await getApiDogs();
+  let allTemperaments = [];
+  for (const dog of allDogs) {
+    if (dog.temperament) {
+      for (const single_temperament of dog.temperament) {
+        if (!allTemperaments.includes(single_temperament)) {
+          allTemperaments.push(single_temperament);
+          await Temperament.create({ name: single_temperament });
+        }
+      }
+    }
+  }
+  const dbTemperaments = await Temperament.findAll({
+    attributes: ["id", "name"],
+  });
+  return dbTemperaments;
+};
 module.exports = {
   getApiDogs,
   getDbDogs,
   getAllDogs,
+  getTemperaments,
 };
