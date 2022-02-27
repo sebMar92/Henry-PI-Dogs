@@ -6,7 +6,7 @@ export default function NavBar() {
   return (
     <nav>
       <div className="logo-wrapper">
-        <Link to="/home">
+        <Link to="/home" id="nav-home">
           <img id="logoNav" src={dogLogo} alt="Dogo logo" />
         </Link>
       </div>

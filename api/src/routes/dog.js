@@ -32,7 +32,7 @@ router.post("", async function (req, res) {
         await doge.addTemperament(t);
       });
     }
-    return res.send({ msg: "Dog bread succesfully created" });
+    return res.send({ msg: "Dog breed succesfully created" });
   } else {
     return res.send({ error: "Missing necessary data to create a dog" });
   }
