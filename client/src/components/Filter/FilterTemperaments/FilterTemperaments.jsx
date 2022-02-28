@@ -9,6 +9,7 @@ export default function FilterTemperaments(props) {
   const allTemperaments = useSelector((state) => state.temperaments);
   useEffect(() => {
     dispatch(getTemperaments());
+    props.stateChanger(false);
   }, [dispatch]);
   return (
     <div className="temperamentsOption hoverable-buttons">

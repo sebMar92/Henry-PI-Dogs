@@ -62,22 +62,29 @@ export default function CreateDog() {
         [Type]: "",
       });
     } else {
-      if (!/^\d+$/.test(value)) {
+      if (value < 1) {
         setError({
           ...error,
-          [Type]: `${value} is not a number!`,
+          [Type]: `The value must be higher than 0!`,
         });
       } else {
-        setError({
-          ...error,
-          [Type]: "",
+        if (!/^\d+$/.test(value)) {
+          setError({
+            ...error,
+            [Type]: `${value} is not a number!`,
+          });
+        } else {
+          setError({
+            ...error,
+            [Type]: "",
+          });
+        }
+        setState({
+          ...state,
+          [Type]: value,
         });
       }
     }
-    setState({
-      ...state,
-      [Type]: value,
-    });
   };
   const validateMinMax = (min, max, errorType, errorMessage) => {
     if (Number(min) > Number(max)) {
@@ -97,7 +104,7 @@ export default function CreateDog() {
       if (!/^[A-Za-z ]+$/.test(input)) {
         setError({
           ...error,
-          name: `${input} wouldn't be a nice name. Please use A-Z.`,
+          name: `${input} wouldn't be a nice name. Please use A-Z characters.`,
         });
       } else {
         setError({
@@ -238,6 +245,9 @@ export default function CreateDog() {
               <div>
                 <input
                   className="half-input"
+                  input
+                  type="number"
+                  min="1"
                   name="minHeight"
                   required
                   placeholder="Dog's min height..."
@@ -250,9 +260,11 @@ export default function CreateDog() {
               <div>
                 <input
                   className="half-input"
+                  input
+                  type="number"
+                  min="1"
                   name="maxHeight"
                   required
-                  value={state.maxHeight}
                   placeholder="Dog's max height..."
                   onChange={(e) =>
                     validateNumber(e.target.value, e.target.name)
@@ -266,9 +278,11 @@ export default function CreateDog() {
               <div>
                 <input
                   className="half-input"
+                  input
+                  type="number"
+                  min="1"
                   name="minWeight"
                   required
-                  value={state.minWeight}
                   placeholder="Dog's min weight..."
                   onChange={(e) =>
                     validateNumber(e.target.value, e.target.name)
@@ -280,9 +294,11 @@ export default function CreateDog() {
                 {" "}
                 <input
                   className="half-input"
+                  input
+                  type="number"
+                  min="1"
                   name="maxWeight"
                   required
-                  value={state.maxWeight}
                   placeholder="Dog's max weight..."
                   onChange={(e) =>
                     validateNumber(e.target.value, e.target.name)
@@ -296,10 +312,12 @@ export default function CreateDog() {
               <div>
                 <input
                   className="half-input"
+                  input
+                  type="number"
+                  min="1"
                   name="minLife_span"
                   required
-                  value={state.minLife_span}
-                  placeholder="Dog's min Life..."
+                  placeholder="Dog's min lifespan..."
                   onChange={(e) =>
                     validateNumber(e.target.value, e.target.name)
                   }
@@ -309,10 +327,12 @@ export default function CreateDog() {
               <div>
                 <input
                   className="half-input"
+                  input
+                  type="number"
+                  min="1"
                   name="maxLife_span"
                   required
-                  value={state.maxLife_span}
-                  placeholder="Dog's max Life..."
+                  placeholder="Dog's max lifespan..."
                   onChange={(e) =>
                     validateNumber(e.target.value, e.target.name)
                   }

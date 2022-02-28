@@ -19,7 +19,11 @@ export default function Filter() {
     if (checked) {
       setTemperamentFilter((oldTemperament) => [...oldTemperament, value]);
     } else {
-      setTemperamentFilter(temperamentFilter.filter((t) => t !== value));
+      if (value) {
+        setTemperamentFilter(temperamentFilter.filter((t) => t !== value));
+      } else {
+        setTemperamentFilter([]);
+      }
     }
   };
   const nameChange = (value) => {
