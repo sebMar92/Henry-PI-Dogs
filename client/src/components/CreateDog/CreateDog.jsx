@@ -232,124 +232,143 @@ export default function CreateDog() {
               handleSubmit(e);
             }}
           >
-            <input
-              className="full-input"
-              name="name"
-              required
-              value={state.name}
-              placeholder="Dog's breed name..."
-              onChange={(e) => validateName(e.target.value)}
-            ></input>
-            <p className="error-msg">{error.name}</p>
-            <div className="group-input">
-              <div>
+            <div className="form-title-input">
+              <h3 className="titles">Name: </h3>
+              <div className="form-input-error">
                 <input
-                  className="half-input"
-                  input
-                  type="number"
-                  min="1"
-                  name="minHeight"
+                  className="full-input"
+                  name="name"
                   required
-                  placeholder="Dog's min height..."
-                  onChange={(e) =>
-                    validateNumber(e.target.value, e.target.name)
-                  }
+                  value={state.name}
+                  placeholder="Dog's breed name..."
+                  onChange={(e) => validateName(e.target.value)}
                 ></input>
-                <p className="error-msg">{error.minHeight}</p>
-              </div>
-              <div>
-                <input
-                  className="half-input"
-                  input
-                  type="number"
-                  min="1"
-                  name="maxHeight"
-                  required
-                  placeholder="Dog's max height..."
-                  onChange={(e) =>
-                    validateNumber(e.target.value, e.target.name)
-                  }
-                ></input>
-                <p className="error-msg">{error.maxHeight}</p>
-                <p className="second-error error-msg">{error.height}</p>
+                <p className="error-msg">{error.name}</p>
               </div>
             </div>
+
             <div className="group-input">
-              <div>
-                <input
-                  className="half-input"
-                  input
-                  type="number"
-                  min="1"
-                  name="minWeight"
-                  required
-                  placeholder="Dog's min weight..."
-                  onChange={(e) =>
-                    validateNumber(e.target.value, e.target.name)
-                  }
-                ></input>
-                <p className="error-msg">{error.minWeight}</p>
-              </div>
-              <div>
-                {" "}
-                <input
-                  className="half-input"
-                  input
-                  type="number"
-                  min="1"
-                  name="maxWeight"
-                  required
-                  placeholder="Dog's max weight..."
-                  onChange={(e) =>
-                    validateNumber(e.target.value, e.target.name)
-                  }
-                ></input>
-                <p className="error-msg">{error.maxWeight}</p>
-                <p className="second-error error-msg">{error.weight}</p>
+              <div className="form-title-input">
+                <h3 className="titles">Height: </h3>
+                <div className="form-input-error">
+                  <input
+                    className="half-input"
+                    input
+                    type="number"
+                    min="1"
+                    name="minHeight"
+                    required
+                    placeholder="Dog's min height..."
+                    onChange={(e) =>
+                      validateNumber(e.target.value, e.target.name)
+                    }
+                  ></input>
+                  <p className="error-msg">{error.minHeight}</p>
+                </div>
+                <div className="form-input-error">
+                  <input
+                    className="half-input"
+                    input
+                    type="number"
+                    min="1"
+                    name="maxHeight"
+                    required
+                    placeholder="Dog's max height..."
+                    onChange={(e) =>
+                      validateNumber(e.target.value, e.target.name)
+                    }
+                  ></input>
+                  <p className="error-msg">{error.maxHeight}</p>
+                  <p className="second-error error-msg">{error.height}</p>
+                </div>
               </div>
             </div>
             <div className="group-input">
-              <div>
-                <input
-                  className="half-input"
-                  input
-                  type="number"
-                  min="1"
-                  name="minLife_span"
-                  required
-                  placeholder="Dog's min lifespan..."
-                  onChange={(e) =>
-                    validateNumber(e.target.value, e.target.name)
-                  }
-                ></input>
-                <p className="error-msg">{error.minLife_span}</p>
-              </div>
-              <div>
-                <input
-                  className="half-input"
-                  input
-                  type="number"
-                  min="1"
-                  name="maxLife_span"
-                  required
-                  placeholder="Dog's max lifespan..."
-                  onChange={(e) =>
-                    validateNumber(e.target.value, e.target.name)
-                  }
-                ></input>
-                <p className="error-msg">{error.maxLife_span}</p>
-                <p className="second-error error-msg">{error.lifespan}</p>
+              <div className="form-title-input">
+                <h3 className="titles">Weight: </h3>
+                <div className="form-input-error">
+                  <input
+                    className="half-input"
+                    input
+                    type="number"
+                    min="1"
+                    name="minWeight"
+                    required
+                    placeholder="Dog's min weight..."
+                    onChange={(e) =>
+                      validateNumber(e.target.value, e.target.name)
+                    }
+                  ></input>
+                  <p className="error-msg">{error.minWeight}</p>
+                </div>
+                <div className="form-input-error">
+                  <input
+                    className="half-input"
+                    input
+                    type="number"
+                    min="1"
+                    name="maxWeight"
+                    required
+                    placeholder="Dog's max weight..."
+                    onChange={(e) =>
+                      validateNumber(e.target.value, e.target.name)
+                    }
+                  ></input>
+                  <p className="error-msg">{error.maxWeight}</p>
+                  <p className="second-error error-msg">{error.weight}</p>
+                </div>
               </div>
             </div>
-            <div>
-              <input
-                className="full-input"
-                name="image"
-                placeholder="Dog's picture..."
-                onChange={(e) => validateURL(e.target.value, e.target.name)}
-              ></input>
-              <p className="error-msg">{error.image}</p>
+            <div className="group-input">
+              <div className="form-title-input">
+                <h3 className="titles">Lifespan: </h3>
+                <div className="form-input-error">
+                  <input
+                    className="half-input"
+                    input
+                    type="number"
+                    min="1"
+                    name="minLife_span"
+                    required
+                    placeholder="Dog's min lifespan..."
+                    onChange={(e) =>
+                      validateNumber(e.target.value, e.target.name)
+                    }
+                  ></input>
+                  <p className="error-msg">{error.minLife_span}</p>
+                </div>
+                <div className="form-input-error">
+                  <input
+                    className="half-input"
+                    input
+                    type="number"
+                    min="1"
+                    name="maxLife_span"
+                    required
+                    placeholder="Dog's max lifespan..."
+                    onChange={(e) =>
+                      validateNumber(e.target.value, e.target.name)
+                    }
+                  ></input>
+                  <p className="error-msg">{error.maxLife_span}</p>
+                  <p className="second-error error-msg">{error.lifespan}</p>
+                </div>
+              </div>
             </div>
+
+            <div className="form-title-input">
+              <h3 className="titles">Image: </h3>
+              <div className="form-input-error">
+                <input
+                  className="full-input"
+                  name="image"
+                  placeholder="Dog's picture..."
+                  onChange={(e) => validateURL(e.target.value, e.target.name)}
+                ></input>
+                <p className="error-msg">{error.image}</p>
+              </div>
+            </div>
+
             <input
               className="form-button"
               disabled={

@@ -16,3 +16,29 @@
   border-radius: 15px;
   height: 25px;
 }
+@media (max-width: 955px) {
+  .nameSearchBar {
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  #searchButton {
+    display: none;
+  }
+  #searchBar {
+    margin-right: 4px;
+  }
+}
+
+@media (max-width: 700px) {
+  .nameSearchBar {
+    width: 20%;
+  }
+  #searchBar {
+    width: 90%;
+  }
+}

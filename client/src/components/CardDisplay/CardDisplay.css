@@ -39,6 +39,7 @@
   color: white;
   min-width: 8vh;
   height: 100%;
+  z-index: 2;
 }
 
 #prev {
