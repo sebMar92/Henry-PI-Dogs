@@ -18,7 +18,7 @@ const parseData = function ([min, max]) {
 
   return [parseMin, parseMax];
 };
-//-----get api dogs
+//--------------------get api dogs--------------------
 const getApiDogs = async function () {
   const apiInfo = await axios.get(
     `https://api.thedogapi.com/v1/breeds?apikey=${YOUR_API_KEY}`
@@ -46,7 +46,7 @@ const getApiDogs = async function () {
   });
   return dogsWithTemperamentsAsArray;
 };
-//-----get database dogs
+//--------------------get database dogs--------------------
 const getDbDogs = async function () {
   const dbDogs = await Dog.findAll({
     attributes: [

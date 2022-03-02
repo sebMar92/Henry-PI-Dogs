@@ -22,7 +22,7 @@ export default function Details() {
     dispatch(getDogs());
   }, [dispatch]);
   useEffect(() => {
-    let dog = allDogs.find((dog) => dog.id === Number(id));
+    let dog = allDogs.find((dog) => dog.id == id);
     if (dog) {
       if (dog.temperament) {
         if (dog.temperament.length > 2) {
@@ -60,7 +60,7 @@ export default function Details() {
           {info.maxHeight && info.maxHeight} cm.
         </h2>
         <h2 className="detail-text">
-          Their average height ranges from {info.minWeight && info.minWeight} to{" "}
+          Their average weight ranges from {info.minWeight && info.minWeight} to{" "}
           {info.maxWeight && info.maxWeight} kg.
         </h2>
         <h2 className="detail-text">

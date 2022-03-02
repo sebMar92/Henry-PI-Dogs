@@ -19,7 +19,9 @@ describe("DogCard", () => {
             minWeight={2}
             maxWeight={6}
             lifespan={"1 - 3 years"}
-            image={""}
+            image={
+              "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg"
+            }
             temperaments={["Happy", "Active"]}
           />
         </BrowserRouter>,
@@ -37,8 +39,8 @@ describe("DogCard", () => {
     expect(name).toBeInTheDocument();
     expect(name.tagName).toBe("P");
   });
-  it("should render a <p> with the dog's weight in the following format: 'Weight: minWeight - maxWeight'", () => {
-    const weight = screen.getByText("Weight: 2 - 6");
+  it("should render a <p> with the dog's weight in the following format: 'Weight: {minWeight} - {maxWeight} kg.'", () => {
+    const weight = screen.getByText("Weight: 2 - 6 kg.");
     expect(weight).toBeInTheDocument();
     expect(weight.tagName).toBe("P");
   });

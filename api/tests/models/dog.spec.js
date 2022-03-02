@@ -15,14 +15,17 @@ describe("Dog model", () => {
           .then(() => done(new Error("It requires a valid name")))
           .catch(() => done());
       });
-      it("should work when its a valid name", () => {
+      it("should work when all values are valid", () => {
         Dog.create({
-          name: "pug",
+          name: "Pug",
           minHeight: 12,
           maxHeight: 15,
           minWeight: 12,
           maxWeight: 15,
-          lifespan: 12 - 14,
+          image:
+            "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
+          lifespan: "12 - 14 years",
+          temperaments: [1, 8],
         }).then((res) => {
           done();
         });
