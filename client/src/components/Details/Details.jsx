@@ -68,10 +68,9 @@ export default function Details() {
           {info.lifespan && info.lifespan.split(" - ").join(" to ")}.
         </h2>
         <h2 className="detail-text">
-          They are usually{" "}
-          {typeof info.temperament === "string" &&
-            info.temperament.toLowerCase()}
-          .
+          {typeof info.temperament === "string"
+            ? "They are usually " + info.temperament.toLowerCase() + "."
+            : "We don't know much about them yet."}
         </h2>
       </div>
     </div>

@@ -28,7 +28,7 @@ export default function DogCard({
           <p className="hidden">Weight: {`${minWeight} - ${maxWeight}`} kg.</p>
           <p className="hidden">Lifespan: {lifespan}</p>
           <p className="hidden">
-            Temperaments: {temperaments && temperaments.join(", ")}
+            {temperaments && "Temperaments: " + temperaments.join(", ")}
           </p>
         </div>
       </div>
