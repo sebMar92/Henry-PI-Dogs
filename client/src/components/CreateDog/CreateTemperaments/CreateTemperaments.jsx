@@ -42,6 +42,7 @@ export default function CreateTemperaments(props) {
     let sendId = selectedTemperaments.map((t) => t.id);
     let sendName = selectedTemperaments.map((t) => t.name);
     props.stateChanger(sendId, sendName);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTemperaments]);
   const handleSelections = (temperamentId, temperamentName) => {
     setSelectedTemperaments(
@@ -80,7 +81,7 @@ export default function CreateTemperaments(props) {
   return (
     <div className="create-temperaments">
       <h3>Pick some temperaments</h3>
-      <div>
+      <div id="create-inner-container">
         <input
           type="text"
           id="create-search"
@@ -88,23 +89,21 @@ export default function CreateTemperaments(props) {
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
-
+        <div id="container-selected">
+          {selectedTemperaments &&
+            selectedTemperaments.map((selected) => (
+              <div
+                className="custom-selected"
+                key={selected.id}
+                id={selected.id}
+                onClick={(e) => handleCancelation(selected.id, selected.name)}
+              >
+                <div>{selected.name}</div>
+                <div className="x-button">X</div>
+              </div>
+            ))}
+        </div>
         <div id="temperament-list">
-          <div>
-            {selectedTemperaments &&
-              selectedTemperaments.map((selected) => (
-                <div
-                  key={selected.id}
-                  id={selected.id}
-                  className="custom-selected"
-                  onClick={(e) =>
-                    handleCancelation(e.target.id, e.target.innerHTML)
-                  }
-                >
-                  {selected.name}
-                </div>
-              ))}
-          </div>
           {displayTemperaments &&
             displayTemperaments.map((temperaments) => (
               <div

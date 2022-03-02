@@ -42,6 +42,7 @@ export default function CreateDog() {
       ...state,
       lifespan: `${state.minLife_span} - ${state.maxLife_span} years`,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.minLife_span, state.maxLife_span]);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +55,17 @@ export default function CreateDog() {
   const temperamentChange = (id, name) => {
     setState({ ...state, temperaments: id, temperamentsName: name });
   };
-
+  const validateNumberKeyDown = (e) => {
+    if (
+      e.key === "e" ||
+      e.key === "E" ||
+      e.key === "+" ||
+      e.key === "-" ||
+      e.ctrlKey
+    ) {
+      e.preventDefault();
+    }
+  };
   const validateNumber = (value, Type) => {
     if (!value) {
       setError({
@@ -71,7 +82,7 @@ export default function CreateDog() {
         if (!/^\d+$/.test(value)) {
           setError({
             ...error,
-            [Type]: `${value} is not a number!`,
+            [Type]: `${value} is not a whole number!`,
           });
         } else {
           setError({
@@ -137,6 +148,7 @@ export default function CreateDog() {
         height: "",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.minHeight, state.maxHeight]);
   useEffect(() => {
     if (state.minWeight && state.maxWeight) {
@@ -152,6 +164,7 @@ export default function CreateDog() {
         weight: "",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.minWeight, state.maxWeight]);
   useEffect(() => {
     if (state.minLife_span && state.maxLife_span) {
@@ -167,6 +180,7 @@ export default function CreateDog() {
         lifespan: "",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.minLife_span, state.maxLife_span]);
   const imageIsOkey = (url) => {
     setError({
@@ -253,12 +267,13 @@ export default function CreateDog() {
                 <div className="form-input-error">
                   <input
                     className="half-input"
-                    input
                     type="number"
                     min="1"
                     name="minHeight"
                     required
+                    autocomplete="off"
                     placeholder="Dog's min height..."
+                    onKeyDown={(e) => validateNumberKeyDown(e)}
                     onChange={(e) =>
                       validateNumber(e.target.value, e.target.name)
                     }
@@ -268,12 +283,13 @@ export default function CreateDog() {
                 <div className="form-input-error">
                   <input
                     className="half-input"
-                    input
                     type="number"
                     min="1"
                     name="maxHeight"
                     required
+                    autocomplete="off"
                     placeholder="Dog's max height..."
+                    onKeyDown={(e) => validateNumberKeyDown(e)}
                     onChange={(e) =>
                       validateNumber(e.target.value, e.target.name)
                     }
@@ -289,12 +305,13 @@ export default function CreateDog() {
                 <div className="form-input-error">
                   <input
                     className="half-input"
-                    input
                     type="number"
                     min="1"
                     name="minWeight"
                     required
+                    autocomplete="off"
                     placeholder="Dog's min weight..."
+                    onKeyDown={(e) => validateNumberKeyDown(e)}
                     onChange={(e) =>
                       validateNumber(e.target.value, e.target.name)
                     }
@@ -304,12 +321,13 @@ export default function CreateDog() {
                 <div className="form-input-error">
                   <input
                     className="half-input"
-                    input
                     type="number"
                     min="1"
                     name="maxWeight"
                     required
+                    autocomplete="off"
                     placeholder="Dog's max weight..."
+                    onKeyDown={(e) => validateNumberKeyDown(e)}
                     onChange={(e) =>
                       validateNumber(e.target.value, e.target.name)
                     }
@@ -325,12 +343,13 @@ export default function CreateDog() {
                 <div className="form-input-error">
                   <input
                     className="half-input"
-                    input
                     type="number"
                     min="1"
                     name="minLife_span"
                     required
+                    autocomplete="off"
                     placeholder="Dog's min lifespan..."
+                    onKeyDown={(e) => validateNumberKeyDown(e)}
                     onChange={(e) =>
                       validateNumber(e.target.value, e.target.name)
                     }
@@ -340,12 +359,13 @@ export default function CreateDog() {
                 <div className="form-input-error">
                   <input
                     className="half-input"
-                    input
                     type="number"
                     min="1"
                     name="maxLife_span"
                     required
+                    autocomplete="off"
                     placeholder="Dog's max lifespan..."
+                    onKeyDown={(e) => validateNumberKeyDown(e)}
                     onChange={(e) =>
                       validateNumber(e.target.value, e.target.name)
                     }

@@ -15,14 +15,14 @@ export default function CardDisplay() {
   let display = useSelector((state) => state.display);
   useEffect(() => {
     dispatch(getDogs());
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     setPage(0);
   }, [display]);
   useEffect(() => {
     const dots = document.getElementsByClassName("page-dot");
     for (let dot of dots) {
-      if (page == dot.id) {
+      if (page === Number(dot.id)) {
         dot.className = "page-dot page-dot-selected";
       } else if (Math.abs(page - dot.id) === 1) {
         dot.className = "page-dot page-dot-adyacent";
@@ -30,13 +30,14 @@ export default function CardDisplay() {
         dot.className = "page-dot";
       }
     }
-  }, [page, display]);
+  }, [page, display, dispatch]);
   useEffect(() => {
     dispatch(changeOrder({ type: ordered.type, reverse: ordered.reverse }));
-  }, [filtered, dogs]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtered, dogs, dispatch]);
   useEffect(() => {
     dispatch(paginate());
-  }, [ordered]);
+  }, [ordered, dispatch]);
 
   if (!Array.isArray(display)) {
     return (

@@ -40,11 +40,11 @@ const getApiDogs = async function () {
       temperament: e.temperament,
     };
   });
-  const temperamentsToArray = apiDogs.map((dog) => {
+  const dogsWithTemperamentsAsArray = apiDogs.map((dog) => {
     const temperamentSplit = dog.temperament && dog.temperament.split(", ");
     return { ...dog, temperament: temperamentSplit };
   });
-  return temperamentsToArray;
+  return dogsWithTemperamentsAsArray;
 };
 //-----get database dogs
 const getDbDogs = async function () {
@@ -69,6 +69,7 @@ const getDbDogs = async function () {
       },
     },
   });
+
   const dbDogstoJson = dbDogs.map((dog) => dog.toJSON());
   const dbDogsWithTemperamentStrings = dbDogstoJson.map((dog) => {
     const temperamentName = dog.temperament.map(
@@ -78,20 +79,20 @@ const getDbDogs = async function () {
   });
   return dbDogsWithTemperamentStrings;
 };
+
 const getAllDogs = async function () {
-  const apiDogs = await getApiDogs();
-  const dbDogs = await getDbDogs();
+  const [apiDogs, dbDogs] = await Promise.all([getApiDogs(), getDbDogs()]);
   return dbDogs.concat(apiDogs);
 };
 
 const getTemperaments = async function () {
   const allDogs = await getApiDogs();
-  let allTemperaments = [];
+  let allTemperamentsAux = [];
   for (const dog of allDogs) {
     if (dog.temperament) {
       for (const single_temperament of dog.temperament) {
-        if (!allTemperaments.includes(single_temperament)) {
-          allTemperaments.push(single_temperament);
+        if (!allTemperamentsAux.includes(single_temperament)) {
+          allTemperamentsAux.push(single_temperament);
           await Temperament.create({ name: single_temperament });
         }
       }

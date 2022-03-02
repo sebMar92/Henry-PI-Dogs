@@ -22,7 +22,7 @@ export default function Details() {
     dispatch(getDogs());
   }, [dispatch]);
   useEffect(() => {
-    let dog = allDogs.find((dog) => dog.id == id);
+    let dog = allDogs.find((dog) => dog.id === Number(id));
     if (dog) {
       if (dog.temperament) {
         if (dog.temperament.length > 2) {

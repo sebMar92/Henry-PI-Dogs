@@ -10,6 +10,7 @@ export default function FilterTemperaments(props) {
   useEffect(() => {
     dispatch(getTemperaments());
     props.stateChanger(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
   return (
     <div className="temperamentsOption hoverable-buttons">

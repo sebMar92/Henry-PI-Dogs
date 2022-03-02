@@ -14,7 +14,7 @@ router.post("", async function (req, res) {
     temperaments,
   } = req.body;
   if (name && minHeight && maxHeight && minWeight && maxWeight && lifespan) {
-    const doge = await Dog.create({
+    const newDog = await Dog.create({
       name: name,
       minHeight: minHeight,
       maxHeight: maxHeight,
@@ -29,7 +29,7 @@ router.post("", async function (req, res) {
         await getTemperaments();
       }
       temperaments.forEach(async (t) => {
-        await doge.addTemperament(t);
+        await newDog.addTemperament(t);
       });
     }
     return res.send({ msg: "Dog breed succesfully created" });

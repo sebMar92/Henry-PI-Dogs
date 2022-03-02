@@ -58,8 +58,11 @@ export default function Filter() {
           <FilterTemperaments stateChanger={temperamentChange} />
           <FilterOrigin stateChanger={setOriginFilter} />
           <FilterName stateChanger={nameChange} />
-          <div className="hoverable-buttons clear-button">
-            <p onClick={() => handleButtons()}>Clear</p>
+          <div
+            onClick={() => handleButtons()}
+            className="hoverable-buttons clear-button"
+          >
+            <p>Clear</p>
           </div>
         </div>
         <div>
