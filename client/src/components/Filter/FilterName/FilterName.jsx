@@ -1,13 +1,17 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { paginate } from "../../../actions";
 import "./FilterName.css";
 
 export default function FilterName(props) {
   const [name, setName] = useState("");
+  const dispatch = useDispatch();
   const handleSearchBar = (value) => {
     setName(value);
     if (value === "") {
       props.stateChanger("");
+      dispatch(paginate());
     }
   };
   const handleSubmit = (e, value) => {

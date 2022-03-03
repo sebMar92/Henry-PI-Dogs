@@ -7,12 +7,22 @@ export const POST_DOG = "POST_DOG";
 export const CHANGE_ORDER = "CHANGE_ORDER";
 export const PAGINATE = "PAGINATE";
 
+// export function getDogs() {
+//   return async function (dispatch) {
+//     var dogs = await axios.get("/dogs");
+//     return dispatch({
+//       type: GET_ALL_DOGS,
+//       payload: dogs.data,
+//     });
+//   };
+// }
 export function getDogs() {
-  return async function (dispatch) {
-    var dogs = await axios.get("/dogs");
-    return dispatch({
-      type: GET_ALL_DOGS,
-      payload: dogs.data,
+  return function (dispatch) {
+    return axios.get("/dogs").then((res) => {
+      return dispatch({
+        type: GET_ALL_DOGS,
+        payload: res.data,
+      });
     });
   };
 }
@@ -30,6 +40,7 @@ export function filterDogs(origin, temperaments, name) {
         },
       });
     }
+
     return dispatch({
       type: FILTER_DOGS,
       payload: {
