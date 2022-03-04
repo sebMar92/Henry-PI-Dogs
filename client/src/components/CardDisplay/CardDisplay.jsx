@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import { getDogs, changeOrder, paginate } from "../../actions/index.js";
 import DogCard from "../DogCard/DogCard.jsx";
 import "./CardDisplay.css";
-
+import "./loading.css";
 export default function CardDisplay() {
   const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   let dogs = useSelector((state) => state.dogs);
   let filtered = useSelector((state) => state.filtered);
@@ -16,6 +17,13 @@ export default function CardDisplay() {
   useEffect(() => {
     dispatch(getDogs());
   }, [dispatch]);
+  useEffect(() => {
+    if (dogs.length === 0) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [dogs]);
   useEffect(() => {
     setPage(0);
   }, [display]);
@@ -38,6 +46,27 @@ export default function CardDisplay() {
   useEffect(() => {
     dispatch(paginate());
   }, [ordered, dispatch]);
+  if (loading) {
+    return (
+      <div id="loading-container">
+        <div class="lds-default">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <h3 id="fetching">fetching data...</h3>
+      </div>
+    );
+  }
 
   if (!Array.isArray(display)) {
     return (

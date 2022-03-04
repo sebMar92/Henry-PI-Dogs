@@ -125,3 +125,10 @@
   height: 75%;
   background-color: rgba(175, 48, 71, 0.6);
 }
+#loading-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
