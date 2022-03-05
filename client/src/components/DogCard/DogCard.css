@@ -1,7 +1,7 @@
 .outter-card {
   margin: 20px;
-  width: 40vh;
-  height: 40vh;
+  width: 36vh;
+  height: 36vh;
   border-radius: 25px;
 }
 
@@ -65,4 +65,8 @@
 }
 .hidden {
   display: none;
+}
+#card-wrapper {
+  height: 36vh;
+  background-color: red;
 }

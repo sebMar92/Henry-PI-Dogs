@@ -5,4 +5,10 @@
   width: 100%;
   height: 100%;
   user-select: none;
+  display: flex;
+  justify-content: center;
+}
+#displayComponent {
+  display: flex;
+  align-items: flex-end;
 }

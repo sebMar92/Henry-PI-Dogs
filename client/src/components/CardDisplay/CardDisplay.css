@@ -3,13 +3,12 @@
   flex-direction: row;
   align-items: center;
   height: 100%;
-  width: 100%;
+  width: 95%;
   margin-bottom: 15px;
 }
 .display {
-  height: 95vh;
+  height: 85vh;
   width: 100%;
-  margin-top: 5vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -43,6 +42,7 @@
 }
 
 #prev {
+  left: 0;
   background: linear-gradient(
     90deg,
     rgba(119, 74, 72, 0.6) 0%,
@@ -61,8 +61,6 @@
   );
 }
 #next {
-  /* margin-left: 96%; */
-
   right: 0;
   background: linear-gradient(
     90deg,
@@ -124,11 +122,4 @@
   width: 75%;
   height: 75%;
   background-color: rgba(175, 48, 71, 0.6);
-}
-#loading-container {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
 }
