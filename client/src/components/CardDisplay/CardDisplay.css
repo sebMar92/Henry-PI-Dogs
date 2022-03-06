@@ -82,7 +82,7 @@
 
 #pages-container {
   position: absolute;
-  width: 100%;
+  width: 95%;
   top: 3vh;
   display: flex;
   justify-content: center;

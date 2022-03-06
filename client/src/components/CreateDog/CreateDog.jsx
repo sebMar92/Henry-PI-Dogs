@@ -254,6 +254,7 @@ export default function CreateDog() {
                   name="name"
                   required
                   value={state.name}
+                  autocomplete="off"
                   placeholder="Dog's breed name..."
                   onChange={(e) => validateName(e.target.value)}
                 ></input>

@@ -38,7 +38,9 @@ export default function Filter() {
     for (let checks of allChecks) {
       checks.checked = false;
     }
+    let originDropdown = document.getElementById("origin");
     let searchBar = document.getElementById("searchBar");
+    originDropdown.value = "all";
     searchBar.value = "";
     setNameToSearch("");
     setOriginFilter("all");
