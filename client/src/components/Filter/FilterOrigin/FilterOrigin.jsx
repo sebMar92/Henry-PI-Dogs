@@ -1,7 +1,11 @@
 import React from "react";
+import { useEffect } from "react";
 import "./FilterOrigin.css";
 
 export default function FilterOrigin(props) {
+  useEffect(() => {
+    props.stateChanger("all");
+  }, []);
   return (
     <div className="originOptions hoverable-buttons">
       Filter by creation method

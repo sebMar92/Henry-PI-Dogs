@@ -103,9 +103,25 @@ const getTemperaments = async function () {
   });
   return dbTemperaments;
 };
+const deleteDbDog = async function (nameToDelete) {
+  console.log("deleteF");
+  console.log(nameToDelete);
+  const dogDeleted = await Dog.findAll({
+    where: {
+      name: nameToDelete,
+    },
+  });
+  await Dog.destroy({
+    where: {
+      name: nameToDelete,
+    },
+  });
+  return dogDeleted;
+};
 module.exports = {
   getApiDogs,
   getDbDogs,
   getAllDogs,
   getTemperaments,
+  deleteDbDog,
 };

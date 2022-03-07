@@ -69,6 +69,16 @@ export function postDog(dog) {
     });
   };
 }
+export function deleteDog(deleteData) {
+  console.log("action name ", deleteData);
+  return async function (dispatch) {
+    var status = await axios.delete("/dog", { data: { deleteData } });
+    return dispatch({
+      type: POST_DOG,
+      payload: status.data,
+    });
+  };
+}
 export function changeOrder(orderData) {
   return {
     type: CHANGE_ORDER,

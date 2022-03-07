@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { postDog } from "../../actions/index.js";
+import { getDogs, postDog } from "../../actions/index.js";
 import CreateTemperaments from "./CreateTemperaments/CreateTemperaments";
 import DogCard from "../DogCard/DogCard.jsx";
 

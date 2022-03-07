@@ -1,12 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getDogs } from "../../actions/index.js";
+import { useParams, useNavigate } from "react-router-dom";
+import { deleteDog, getDogs } from "../../actions/index.js";
 import "./Details.css";
 import "../CardDisplay/loading.css";
 export default function Details() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let allDogs = useSelector((state) => state.dogs);
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState({
@@ -40,6 +41,7 @@ export default function Details() {
             dog.temperament.join(", ") + " and " + lastTemperament;
         }
       }
+
       setInfo({
         name: dog.name,
         minHeight: dog.minHeight,
@@ -49,10 +51,22 @@ export default function Details() {
         lifespan: dog.lifespan,
         image: dog.image,
         temperament: temperamentJoined,
+        fromDatabase: dog.fromDatabase,
       });
     }
   }, [allDogs, id]);
-
+  function handleDelete(name) {
+    let doDelete = window.confirm(
+      "Are you sure you want to delete this dog breed?"
+    );
+    if (doDelete) {
+      dispatch(deleteDog({ name: name }));
+      setTimeout(() => {
+        navigate("/home");
+      }, 500);
+      dispatch(getDogs());
+    }
+  }
   return (
     <div id="loading-container">
       {loading ? (
@@ -75,12 +89,24 @@ export default function Details() {
         </div>
       ) : (
         <div id="detail">
-          <div id="imgContainer">
-            <img
-              className="detail-image"
-              src={info.image && info.image}
-              alt="A cute dog"
-            />
+          <div>
+            <div id="imgContainer">
+              <img
+                className="detail-image"
+                src={info.image && info.image}
+                alt="A cute dog"
+              />
+            </div>
+            {info.fromDatabase ? (
+              <div
+                onClick={() => handleDelete(info.name)}
+                className="hoverable-buttons"
+                id="deleteButton"
+              >
+                {" "}
+                Delete
+              </div>
+            ) : null}
           </div>
           <div id="detail-info">
             <h1 className="detail-text">{info.name && info.name}</h1>

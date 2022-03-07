@@ -29,6 +29,7 @@ export default function Filter() {
   const nameChange = (value) => {
     setNameToSearch(value);
   };
+
   useEffect(() => {
     dispatch(filterDogs(originFilter, temperamentFilter, nameToSearch));
   }, [temperamentFilter, originFilter, nameToSearch, dispatch]);

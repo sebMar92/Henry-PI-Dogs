@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { Dog, Temperament } = require("../db.js");
-const { getTemperaments } = require("../functions/functions.js");
+const { getTemperaments, deleteDbDog } = require("../functions/functions.js");
 
 router.post("", async function (req, res) {
   const {
@@ -36,6 +36,14 @@ router.post("", async function (req, res) {
   } else {
     return res.send({ error: "Missing necessary data to create a dog" });
   }
+});
+router.delete("", async function (req, res) {
+  console.log("deleteR");
+  console.log(req.body);
+  const nameToDelete = req.body.deleteData.name;
+  console.log(nameToDelete);
+  const response = await deleteDbDog(nameToDelete);
+  res.send(response);
 });
 
 module.exports = router;
